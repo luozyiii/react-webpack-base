@@ -1,9 +1,6 @@
-import React from 'react';
+import MyRouter from '@/router';
 function App() {
-  const handleClick = () => {
-    console.log('test 箭头函数');
-  };
-  return <div onClick={handleClick}>hello react app</div>;
+  return <MyRouter />;
 }
 
 export default App;

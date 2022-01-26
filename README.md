@@ -112,4 +112,98 @@ import * as React from 'react';
 "allowSyntheticDefaultImports": true,
 ```
 
+```js
+// ts报错类型“NodeRequire”上不存在属性“context”
+
+// 解决方法
+pnpm install @types/webpack-env -D
+```
+
+```js
+// 别名配置
+// webpack.config.js
+const path = require('path');
+const resolve = (dir) => path.resolve(__dirname, dir);
+module.exports = {
+  resolve: {
+    alias: {
+      '@': resolve('src')
+    }
+  }
+}
+
+// tsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+}
+
+```
+
+```js
+// 引入React无智能提示，报错“React”指 UMD 全局，但当前文件是模块。请考虑改为添加导入。ts(2686)的问题
+
+// 修改tsconfig.json配置
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+  }
+}
+
+```
+
 ### 安装 loaders 和 plugins
+
+#### less-loader
+
+```bash
+npm install css-loader style-loader less less-loader -D
+```
+
+```js
+// webpack.config.js
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.less$/i,
+        loader: [
+          // compiles Less to CSS
+          'style-loader',
+          'css-loader',
+          'less-loader'
+        ]
+      }
+    ]
+  }
+};
+```
+
+### 反向代理：解决本地开发跨域问题
+
+```js
+// webpack.config.js
+module.exports = {
+  ...,
+  devServer: {
+    proxy: {
+      '/baseapis': {
+        target: 'http://test-groupbuy-api.chenxuan100.cn',
+        // 是否启用websocket
+        ws: false,
+        //是否允许跨域
+        changeOrigin: true,
+        pathRewrite: {
+          '^/baseapis': ''
+        }
+      }
+    }
+  }
+};
+
+```

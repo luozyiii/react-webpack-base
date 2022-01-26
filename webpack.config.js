@@ -1,10 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const resolve = (dir) => path.resolve(__dirname, dir);
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/index',
   module: {
     rules: [
@@ -35,7 +37,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html'
-    })
+    }),
+    new SimpleProgressWebpackPlugin(),
+    new BundleAnalyzerPlugin()
   ],
   output: {
     filename: '[name]-[chunkhash].js'

@@ -44,6 +44,11 @@ module.exports = {
   output: {
     filename: '[name]-[chunkhash].js'
   },
+  performance: {
+    hints: 'warning',
+    maxAssetSize: 1000000,
+    maxEntrypointSize: 1000000
+  },
   devServer: {
     port: 9000,
     proxy: {

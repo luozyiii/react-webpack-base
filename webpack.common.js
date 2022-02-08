@@ -60,8 +60,9 @@ module.exports = {
     new SimpleProgressWebpackPlugin()
   ],
   output: {
-    path: path.resolve(process.cwd(), 'dist'),
     filename: '[name]-[chunkhash].js',
-    chunkFilename: '[name].chunk.js'
+    chunkFilename: '[name].bundle.js',
+    // `path` is the folder where Webpack will place your bundles
+    path: path.resolve(process.cwd(), 'dist')
   }
 };

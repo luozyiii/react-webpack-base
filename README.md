@@ -239,10 +239,10 @@ module.exports = {
 ```js
 // 以下写法在ts上报错
 import React from 'react';
-// 需调整为
+// 解决方法一：需调整为
 import * as React from 'react';
 
-// 不需调整，增加tsconfig.json 配置
+// 解决方法二：不需调整，增加tsconfig.json 配置
 "allowSyntheticDefaultImports": true,
 ```
 
@@ -298,16 +298,20 @@ module.exports = {
 npm install react react-dom
 ```
 
-### 2. react-router-dom v6
+### 2. 约定式路由 + 路由懒加载
 
-- react-loadable 按需加载(研究)
+[link](https://reactrouter.com/docs/en/v6/getting-started/overview)
 
-[参考文档](https://reactrouter.com/docs/en/v6/getting-started/overview)
+- 目录
+
+```bash
+src/router;
+```
 
 - 依赖安装
 
 ```bash
-# react-router-dom
+# react-router-dom v6
 npm install react-router-dom
 # types
 npm i -D @types/react-router-dom
@@ -320,10 +324,10 @@ npm i -D @types/react-router-dom
 ```js
 // 以下目录结构
 └── pages
-    ├── index.tsx
+    ├── index.n.tsx
     ├── login
-    |      └── index.tsx
-    └── 404.tsx
+    |      └── index.n.tsx
+    └── 404.n.tsx
 
 // 会得到以下配置的路由
 [
@@ -341,6 +345,12 @@ src/pages/invoice/[id].tsx 会成为 /invoice/:id
 
 // 以后再考虑
 src/pages/invoice/[id]/settings.tsx 会成为 /invoice/:id/settings
+```
+
+#### 路由懒加载[router lazy loading](https://reactrouter.com/docs/en/v6/examples/lazy-loading)
+
+```js
+踩坑1：about/index.tsx 刚开始被 require.context('@/pages', true, /\.tsx$/) 缓存过，一直调试懒加载都失败; 后面把约定式的路由 改成识别 .n.tsx 结尾的; 懒加载的正常书写 .tsx
 ```
 
 ## 五、抽离 API 层，二次封装 axios
@@ -455,7 +465,3 @@ Object.freeze(api);
 
 export default api;
 ```
-
-## 遗留问题
-
-- react-router-dom v6 懒加载 和分包问题待解决

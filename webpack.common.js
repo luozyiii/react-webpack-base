@@ -61,7 +61,7 @@ module.exports = {
   ],
   output: {
     filename: '[name]-[chunkhash].js',
-    chunkFilename: '[name].bundle.js',
+    chunkFilename: '[name]-[chunkhash].js',
     // `path` is the folder where Webpack will place your bundles
     path: path.resolve(process.cwd(), 'dist')
   }

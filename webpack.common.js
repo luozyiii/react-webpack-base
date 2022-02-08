@@ -1,12 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const resolve = (dir) => path.resolve(__dirname, dir);
 
 module.exports = {
-  mode: 'production',
   entry: './src/index',
   module: {
     rules: [
@@ -38,30 +36,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html'
     }),
-    new SimpleProgressWebpackPlugin(),
-    new BundleAnalyzerPlugin()
+    new SimpleProgressWebpackPlugin()
   ],
   output: {
     filename: '[name]-[chunkhash].js'
-  },
-  performance: {
-    hints: 'warning',
-    maxAssetSize: 1000000,
-    maxEntrypointSize: 1000000
-  },
-  devServer: {
-    port: 9000,
-    proxy: {
-      '/baseapis': {
-        target: 'http://test-groupbuy-api.chenxuan100.cn',
-        // 是否启用websocket
-        ws: false,
-        //是否允许跨域
-        changeOrigin: true,
-        pathRewrite: {
-          '^/baseapis': ''
-        }
-      }
-    }
   }
 };

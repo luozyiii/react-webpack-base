@@ -6,6 +6,10 @@
 
 webpack 5 + react17 + typescript + react-router-dom v6
 
+- 规范代码风格
+
+参考 [prettierrc-best](https://github.com/luozyiii/prettierrc-best)
+
 - 常用命令
 
 ```bash
@@ -19,10 +23,6 @@ npm run build
 npm run analyzer
 
 ```
-
-- 规范化代码风格
-
-参考 [prettierrc-best](https://github.com/luozyiii/prettierrc-best)
 
 ## 二、webpack 配置、loaders 和 plugins
 

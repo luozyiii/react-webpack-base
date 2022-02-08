@@ -61,6 +61,8 @@ npm install webpack-dev-server -D
 module.exports = {
   ...,
   devServer: {
+    port: 9000,
+    historyApiFallback: true, // history 路由
     proxy: {
       '/baseapis': {
         target: 'http://test-groupbuy-api.chenxuan100.cn',

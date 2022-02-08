@@ -6,6 +6,7 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     port: 9000,
+    historyApiFallback: true,
     proxy: {
       '/baseapis': {
         target: 'http://test-groupbuy-api.chenxuan100.cn',

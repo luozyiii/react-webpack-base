@@ -177,6 +177,34 @@ module.exports = merge(common, {
 });
 ```
 
+- 4. webpack split chunks : 分包
+
+从 webpack v4 开始，移除了 CommonsChunkPlugin，取而代之的是 `optimization.splitChunks`
+
+```js
+// 将react、react-dom、合并一个包(vendor.js)
+module.exports = {
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 20000,
+      minRemainingSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
+      }
+    }
+  }
+};
+```
+
 ## 三、TypeScript 支持
 
 [link](https://webpack.js.org/guides/typescript/)

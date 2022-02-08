@@ -7,6 +7,24 @@ const resolve = (dir) => path.resolve(__dirname, dir);
 
 module.exports = {
   entry: './src/index',
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 20000,
+      minRemainingSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
+      }
+    }
+  },
   module: {
     rules: [
       {
@@ -43,6 +61,7 @@ module.exports = {
   ],
   output: {
     path: path.resolve(process.cwd(), 'dist'),
-    filename: '[name]-[chunkhash].js'
+    filename: '[name]-[chunkhash].js',
+    chunkFilename: '[name].chunk.js'
   }
 };

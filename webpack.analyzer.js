@@ -1,4 +1,4 @@
-// bundle analyzer： 包大小分析
+// bundle analyzer： 包体积大小分析
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 
